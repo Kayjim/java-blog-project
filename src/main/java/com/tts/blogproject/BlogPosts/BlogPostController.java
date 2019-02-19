@@ -16,10 +16,15 @@ public class BlogPostController {
     private BlogPostRepository blogPostRepository;
     private static List<BlogPost> posts = new ArrayList<>();
 
-    @GetMapping(value="/blog_posts/new")
+    @GetMapping(value="/")
     public String index(BlogPost blogPost, Model model) {
         model.addAttribute("posts", posts);
-        return "blogposts/new";    }
+        return "blogpost/index";    }
+
+        @GetMapping(value = "/blog_posts/new")
+        public String newBlog (BlogPost blogPost) {
+        return "blogpost/new";
+        }
 
     //	private BlogPost blogPost;
     @PostMapping(value = "/blog_posts/new")
@@ -32,6 +37,6 @@ public class BlogPostController {
         model.addAttribute("title", blogPost.getTitle());
         model.addAttribute("author", blogPost.getAuthor());
         model.addAttribute("blogEntry", blogPost.getBlogEntry());
-        return "blogposts/result";
+        return "blogpost/result";
     }
 }
