@@ -2,11 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Blog Site</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!-- Latest compiled and minified CSS -->
-    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <div th:insert="fragments/styling :: head-style" ></div></head>
 <body>
+<div th:insert="fragments/navbar :: navbar" ></div>
+
 <div class="container">
     <h1>Welcome to Our Blog Post Site!</h1>
 
@@ -21,21 +20,21 @@
                         <strong><p th:text="${blog.author}"/></strong>
                         <p th:text="${blog.blogEntry}" />
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer clearfix">
                         <!-- Link to Update -->
+                        <a th:href="@{'/blog_posts/{id}/edit'(id=${blog.id})}" class="btn btn-info pull-left" role="button">Edit Post</a>
                         <!-- Link to Show  -->
                         <!--  Link to Destroy -->
-                        Buttons
+                        <form th:action="@{'/blog_posts/{id}/delete'(id=${blog.id})}" th:method="delete" >
+                            <button class="btn btn-primary pull-right">Delete Post</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <a th:href="@{/blog_posts/new}"><button class="btn btn-primary">Submit a New Blog Post</button></a>
-
 </div>
-<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+
+<div th:insert=fragments/styling :: body-links></div>
 </body>
 </html>
